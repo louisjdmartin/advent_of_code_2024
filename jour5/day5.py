@@ -1,4 +1,4 @@
-import sys
+import sys, time
 
 
 def check_report(rules, report):
@@ -43,13 +43,17 @@ if __name__ == "__main__":
 		if(check_report(rules, report)):
 			# PART 1 if report is ok, we add middle element
 			sum_part1 += int(report[len(report)//2])
+			print("REPORT \033[0;32mOK\033[0m     => ", report)
 		else:
 			# PART 2: as check report reorder failed item, we check while report is false
 			while(not check_report(rules, report)):
-				pass
+				time.sleep(0.01) # Just for visualization
+				print("Reorganize report", report, end="\r")
+			print("REPORT \033[0;33mFIXED\033[0m  => ", report)
 			sum_part2 += int(report[len(report)//2])
 
 		i+=1
 	
+	print(" "*160)
 	print("Part 1: %d" % sum_part1)
 	print("Part 2: %d" % sum_part2)
